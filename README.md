@@ -22,7 +22,8 @@ Prints map data from your inventory to the lua console in CSV formatting.
 Print to the lua console by doing one of the following:<br>
 - loading a church save or quicksave<br>
 - opening the map menu<br>
-- creating a quicksave<br>
+- creating a quicksave
+
 If you obtain or discard any maps, simply run the script again.<br>
 To select all and copy, hit ctrl+home -> ctrl+shift+end -> ctrl+C<br>
 "Deftness (36th)", "Deftness (37th)", and "Map Method Metal Slimes (35th)" are used for creating map methods of metal slime variants in grottoes.

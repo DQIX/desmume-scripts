@@ -3,10 +3,6 @@ An interactive HUD for the A-Table. Works with all versions of the game (JPN/USA
 ### How to Use
 Hit L + R to toggle visibility<br>
 Hit Start to restart tracking the position<br>
-32-bit: Displays the current AT seed in hexadecimal (0x0-0xFFFFFFFF)<br>
-15-bit: Displays the current AT output in decimal (0-32767)<br>
-POSITION: Displays the current position based on user input (0-999)<br>
-MAP METHOD: Displays the current position offset by 33 for map methods (33-1032)
 ## DQ9_ChestTimer.lua
 An interactive HUD for the chest timer (USA). If the timer isn't running properly, please restart the script.
 ### How to Use

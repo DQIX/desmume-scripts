@@ -1,4 +1,4 @@
-## DQ9_ATI_v3.lua
+## DQ9_ATI_v4.lua
 An interactive HUD for the A-Table. Works with all versions of the game (JPN/USA/EUR).
 ### How to Use
 Hit L + R to toggle visibility<br>

@@ -1,4 +1,4 @@
--- Written by TKG
+-- TKG
 
 -- How to Use:
 -- Hit L + R to toggle the view on/off
@@ -7,17 +7,7 @@
 -- Display:
 -- Seed (hexadecimal), output (decimal), position (up to 999), map method offset (up to 1032)
 
--- Game Versions:
--- YDQ(J) = JPN (0x4A)
--- YDQ(E) = USA (0x45)
--- YDQ(P) = EUR (0x50)
-
-local tbl_addr = {
-   game_ver = 0x023FFE0F, -- Ascii
-   at_jp = 0x020EEE90,    -- JPN AT address
-   at_en = 0x020EEF30     -- USA/EUR AT address
-}
-
+local at_seed = 0x020EEF30 -- USA/EUR AT address (32-bit)
 local startCount = 0
 local triggerCount = 0
 local LRToggle = true
@@ -33,12 +23,6 @@ local function getHex(decimal, digits)
    if digits == 4 then return string.format("%04X", decimal)
    elseif digits == 8 then return string.format("%08X", decimal)
    end
-end
-
-local function getGameVer(ydqx)
-   local version = memory.readbyte(ydqx)
-   if version == 0x4A then return tbl_addr.at_jp end
-   return tbl_addr.at_en
 end
 
 local function getATSeed(currentSeed)
@@ -128,14 +112,12 @@ local function renderGUI(seed, output, position, mapmethod)
 end
 
 local function main()
-
---memory.writedword(0x020EEF30, 0x00000000) -- poke EN address
+--memory.writedword(0x020EEF30, 0x000018A3) -- poke EN address
 --memory.writedword(0x020EEE90, 0x00000000) -- poke JP address
 --memory.writedword(0x027E38B0, 0x000216CF) -- field camera tilt (USA)
 --memory.writedword(0x027E38B4, 0x00031192) -- field camera zoom (USA)
 
-   local at_addr = getGameVer(tbl_addr.game_ver)
-   local seed = memory.readdword(at_addr)
+   local seed = memory.readdword(at_seed)
    local seed_hex = getHex(seed, 8)
    local output = getATOutput(seed)
 

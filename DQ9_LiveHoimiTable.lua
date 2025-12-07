@@ -1,11 +1,9 @@
--- Written by TKG
+-- TKG
 
 -- How to use:
--- Run the script in DeSmuME (tools > lua scripting > new lua script window)
 -- Press Start to toggle the visibility on/off
 
 local tbl_addr = {
-   game_ver = 0x023FFE0F,    -- Ascii (YDQx)
    facebuttons = 0x04000130, -- face button inputs (all versions)
    en_hi = 0x02108DE0,       -- BT highbyte (USA/EUR)
    en_lo = 0x02108DDC,       -- BT lowbyte (USA/EUR)
@@ -80,15 +78,6 @@ function bt_rand()
 
    return highbyte
 
-end
-
-local function getByte(byteType)
-    local version = memory.readbyte(tbl_addr.game_ver)
-    if byteType == "hi" then
-        return version == 0x4A and tbl_addr.jp_hi or tbl_addr.en_hi
-    elseif byteType == "lo" then
-        return version == 0x4A and tbl_addr.jp_lo or tbl_addr.en_lo
-    end
 end
 
 -- getResult: calculate the percentage/healing value from the output
@@ -176,8 +165,8 @@ function main()
       gui.box(0, -192, 15, -181, tbl_colour.indigoFill, tbl_colour.greyStroke)
 
 
-      highbyte = memory.readdword(getByte("hi"))
-      lowbyte = memory.readdword(getByte("lo"))
+      highbyte = memory.readdword(tbl_addr.en_hi)
+      lowbyte = memory.readdword(tbl_addr.en_lo)
       BTable[1] = highbyte                        -- add the current highbyte value to the table as position 0
       BTable[2] = bt_rand(highbyte, lowbyte)      -- calculate and add position 1 to the table
 

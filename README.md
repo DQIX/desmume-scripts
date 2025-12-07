@@ -1,5 +1,5 @@
 ## DQ9_ATI_v4.lua
-An interactive HUD for the A-Table. Works with all versions of the game (JPN/USA/EUR).
+An interactive HUD for the A-Table. Works for USA/EUR ROMs.
 ### How to Use
 Hit L + R to toggle visibility<br>
 Hit Start to restart tracking the position<br>

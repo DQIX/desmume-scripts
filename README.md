@@ -9,7 +9,7 @@ An interactive HUD for the chest timer (USA). If the timer isn't running properl
 Hit L + R to toggle visibility<br>
 Hit Start to start/reset the stopwatch
 ## DQ9_LiveHoimiTable.lua
-An interactive HUD for the B-Table/Hoimi Table. Works with all versions of the game (JPN/USA/EUR).
+An interactive HUD for the B-Table/Hoimi Table (USA/EUR)
 ### How to Use
 Hit Start to toggle visibility<br>
 The table will update automatically

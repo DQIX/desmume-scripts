@@ -1,0 +1,3 @@
+- Press Start to toggle visibility on/off
+- Timers in cyan are influenced by fountain group (displayed in the top left corner)
+- Capacity indicators change from grey (0) to white (partially filled) to green (full)

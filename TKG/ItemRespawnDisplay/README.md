@@ -12,19 +12,19 @@ The right side of the spreadsheet is a transcription of this japanese page: http
 
 The page shows the item count and respawn time for each fountain group. However it's a little incomplete, so I'm hoping to fully reverse engineer every single node for my own spreadsheet.
 ### Addresses (USA)
-- 0x020F90B2 = fountain group
-- 0x020F90B8 = first node in the node array
-- 0x020FD764 = number of guests tagged
+- `0x020F90B2` = fountain group
+- `0x020F90B8` = first node in the node array
+- `0x020FD764` = number of guests tagged
 ### About Nodes
 One node in the array is a 32bit packed bitfield:
 - Bits 0-8: timer in raw minutes
 - Bits 9-12: maximum capacity (not used for the fountain)
 - Bits 17-24: current capacity
 
-FUN_0208EC78 (USA) handles all of the above and FUN_0208F048 (USA) handles the fountain's maximum capacity.
+`FUN_0208EC78` (USA) handles all of the above and `FUN_0208F048` (USA) handles the fountain's maximum capacity.
 ### About Respawns
 The number of items that can respawn after each completion of the timer is based on the A-Table for normal sparkly spots. It can be a number from 0 to the number of empty slots. This can be manipulated with map methods:
-- Simply freeze AT
+- Freeze AT
 - Set your AT position 1 seed before the desired output
 - The next seed's output will be used in the following calculations once the timer ends:
 ```lua
@@ -55,7 +55,7 @@ A save file's fountain group is determined after the MC is created, shortly afte
 ```
 (15bit AT output) % 8
 ```
-The function responsible is FUN_0208EA10 (USA).
+The function responsible is `FUN_0208EA10` (USA).
 ### Special Thanks
 - Gradis for providing the sprite of Stornway's inn sign
 - Adenine's save editor for item sprites

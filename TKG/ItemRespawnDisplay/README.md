@@ -61,6 +61,6 @@ The function responsible is `FUN_0208EA10` (USA).
 - Adenine's save editor for item sprites
   - https://github.com/DQIX/editor/blob/main/src/assets/itemIcons.png
 - Yacker's version of DeSmuME with breakpoints
-  - https://github.com/Yackerw/desmume/releases/tag/DebugRelease_0_1)
+  - https://github.com/Yackerw/desmume/releases/tag/DebugRelease_0_1
 - The Quester's Rest Discord server
-  - https://discord.com/invite/B3rjhdfG5m)
+  - https://discord.com/invite/B3rjhdfG5m

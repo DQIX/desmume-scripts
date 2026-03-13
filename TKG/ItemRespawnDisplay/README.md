@@ -7,7 +7,9 @@
 - Capacity indicators change from grey (0) to white (partially filled) to green (full)
 ### Sparkly Spot Memory Map (USA)
 https://docs.google.com/spreadsheets/d/10mJKk1UM4PxSw5kyCHiDB-KaqtN5uXtvx_wuMpuWnFU/edit?usp=sharing
+
 The right side of the spreadsheet is a transcription of this japanese page: https://dragonquest9.com/?アイテム採集
+
 It shows the item count and respawn time for each fountain group. However it's a little incomplete, so I'm hoping to fully reverse engineer every single node for my spreadsheet.
 ### Addresses (USA)
 - 0x020F90B2 = fountain group
@@ -18,10 +20,10 @@ One node in the array is a 32bit packed bitfield:
 - Bits 0-8: timer in raw minutes
 - Bits 9-12: maximum capacity (not used for the fountain)
 - Bits 17-24: current capacity
+
 FUN_0208EC78 (USA) handles all of the above and FUN_0208F048 (USA) handles the fountain's maximum capacity.
 ### About Respawns
-The number of items that can respawn after each completion of the timer is based on the A-Table for normal sparkly spots.
-It can be a number from 0 to the number of empty slots. This can be manipulated with map methods:
+The number of items that can respawn after each completion of the timer is based on the A-Table for normal sparkly spots. It can be a number from 0 to the number of empty slots. This can be manipulated with map methods:
 - Simply freeze AT
 - Set your AT position 1 seed before the desired output
 - The next seed's output will be used in the following calculations once the timer ends:

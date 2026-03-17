@@ -16,7 +16,7 @@ One node in the array is a 32bit packed bitfield:
 - Bits 0-8: active timer in raw minutes
 - Bits 9-12: maximum capacity (not used for the fountain)
 - Bits 17-24: current capacity
-- Bits 25–28: duration step
+- Bits 25–28: duration step count
 
 `FUN_0208EC78` (USA) handles all of the above and `FUN_0208F048` (USA) handles the fountain's maximum capacity. Duration step is multiplied by 30 (minutes) to get the total respawn time.
 ### About Respawns

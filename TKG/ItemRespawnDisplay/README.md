@@ -7,10 +7,6 @@
 - Capacity indicators change from grey (0) to white (partially filled) to green (full)
 ### Sparkly Spot Memory Map (USA)
 https://docs.google.com/spreadsheets/d/10mJKk1UM4PxSw5kyCHiDB-KaqtN5uXtvx_wuMpuWnFU/edit?usp=sharing
-
-The right side of the spreadsheet is a transcription of this japanese page: https://dragonquest9.com/?アイテム採集
-
-The page shows the item count and respawn time for each fountain group. However it's a little incomplete, so I'm hoping to fully reverse engineer every single node for my own spreadsheet.
 ### Addresses (USA)
 - `0x020F90B2` = fountain group
 - `0x020F90B8` = first node in the node array

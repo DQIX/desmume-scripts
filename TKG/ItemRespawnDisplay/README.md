@@ -18,7 +18,7 @@ One node in the array is a 32bit packed bitfield:
 - Bits 17-24: current capacity
 - Bits 25–28: duration step count
 
-`FUN_0208EC78` (USA) handles all of the above and `FUN_0208F048` (USA) handles the fountain's maximum capacity. Duration step is multiplied by 30 (minutes) to get the total respawn time.
+`FUN_0208EC78` (USA) handles all of the above and `FUN_0208F048` (USA) handles the fountain's maximum capacity. Duration step count is multiplied by 30 (minutes) to get the total respawn time.
 ### About Respawns
 The number of items that can respawn after each completion of the timer is based on the A-Table for normal sparkly spots. It can be a number from 0 to the number of empty slots. This can be manipulated with map methods:
 - Freeze AT

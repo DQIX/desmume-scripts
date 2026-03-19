@@ -13,10 +13,10 @@ https://docs.google.com/spreadsheets/d/10mJKk1UM4PxSw5kyCHiDB-KaqtN5uXtvx_wuMpuW
 - `0x020FD764` = number of guests tagged
 ### About Nodes
 One node in the array is a 32bit packed bitfield:
-- Bits 0-8: active timer in raw minutes
-- Bits 9-12: maximum capacity (not used for the fountain)
-- Bits 17-24: current capacity
-- Bits 25–28: duration step count
+- Bits 0-8 = active timer in raw minutes
+- Bits 9-12 = maximum capacity (not used for the fountain)
+- Bits 17-24 = current capacity
+- Bits 25–28 = duration step count
 
 `FUN_0208EC78` (USA) handles all of the above and `FUN_0208F048` (USA) handles the fountain's maximum capacity. Duration step count is multiplied by 30 (minutes) to get the total respawn time.
 ### About Respawns
@@ -53,6 +53,16 @@ A save file's fountain group is determined after the MC is created, shortly afte
 (15bit AT output) % 8
 ```
 The function responsible is `FUN_0208EA10` (USA).
+### About Church Saves VS Quicksaves
+`FUN_overlay_d_17__0218b688` (USA) seems to check an 8bit flag at `0x020F33DC` (USA):
+- 0 = load a church save
+- 2 = create a new save
+- 5 = load a quicksave
+- 6 = title screen
+
+If the flag is 0 or 2 (church save or new save), the function calls `FUN_0208ea10` (USA), which determines the fountain group for new saves or otherwise loads a church save's existing fountain group, then initializes the current capacity for all sparkly spots for both church saves and new saves. It explicitly masks (bitwise "and") each 32bit sparkly spot bitfield with `0xFE01FFFF`.
+
+This means church/new saves cause bits 17-24 (current capacity) to be zeroed. If the flag is 5 (quicksave), this initialization function (`FUN_0208ea10`) isn't called.
 ### Special Thanks
 - Gradis for providing the sprite of Stornway's inn sign
 - Adenine's save editor for item sprites

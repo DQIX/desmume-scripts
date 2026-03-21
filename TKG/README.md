@@ -1,20 +1,20 @@
-## DQ9_ATI_v4.lua
+## DQ9_ATI
 An interactive HUD for the A-Table (USA/EUR).
 ### How to Use
 Hit L + R to toggle visibility<br>
 Hit Start to restart tracking the position<br>
-## DQ9_ChestTimer.lua
+## DQ9_ChestTimer
 An interactive HUD for the chest timer (USA). If the timer isn't running properly, please restart the script.
 ### How to Use
 Hit L + R to toggle visibility<br>
 Hit Start to start/reset the stopwatch
-## DQ9_LiveHoimiTable.lua
+## DQ9_BTI
 An interactive HUD for the B-Table/Hoimi Table (USA/EUR).
 ### How to Use
 Hit Start to toggle visibility<br>
 The table will update automatically
-## DQ9_ScrapeMapData_USA_v2.lua
-Prints map data from your inventory to the lua console in CSV formatting.
+## DQ9_ScrapeMapData
+Prints map data from your inventory to the lua console in CSV formatting (USA).
 ### How to Use
 Print to the lua console by doing one of the following:<br>
 - loading a church save or quicksave<br>

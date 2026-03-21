@@ -6,7 +6,7 @@ local addr = {
    en_hi = 0x02108DE0, -- BT highbyte (USA/EUR)
    en_lo = 0x02108DDC, -- BT lowbyte (USA/EUR)
    jp_hi = 0x02108D24, -- BT highbyte (JPN)
-   jp_lo = 0x02108D20  -- BT lowbyte (JP)
+   jp_lo = 0x02108D20  -- BT lowbyte (JPN)
 }
 
 -- Colours based on yab's hoimi table (in dark mode)

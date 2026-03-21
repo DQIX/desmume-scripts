@@ -1,11 +1,14 @@
 -- TKG
 
--- How to Use:
 -- Hit L + R to toggle visibility on/off
 -- Hit Start to restart tracking
 
 -- Display:
--- Seed (hexadecimal), output (decimal), position (up to maxAdvances), map method offset
+-- 32bit seed (hexadecimal)
+-- 15bit output (decimal)
+-- Position (up to maxAdvances)
+-- Map method offset (position +33)
+-- Coolup counter (0-1000)
 
 local addrAT = 0x020EEF30 -- USA/EUR
 local addrCoolup = 0x020FDD4C -- USA
@@ -203,7 +206,7 @@ end
 
 -- Main loop
 local function main()
---memory.writedword(0x020EEF30, 0x806887AE) -- AT
+--memory.writedword(0x020EEF30, 0xf76549a9) -- AT
 --memory.writedword(0x020FDD4C, 0x0000FFFF) -- coolup
 --memory.writedword(0x027E38B0, 0x000216CF) -- field camera tilt
 --memory.writedword(0x027E38B4, 0x00031192) -- field camera zoom
@@ -212,7 +215,7 @@ local function main()
    local seed_hex = getHex(seed, 8)
    local output = getATOutput(seed)
 
-   inputs = joypad.get(1)
+   local inputs = joypad.get(1)
 
    local startPressed = inputs.start and not prevStart
    prevStart = inputs.start

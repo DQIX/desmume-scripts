@@ -3,10 +3,10 @@
 -- Hit Start to toggle visibility on/off
 
 local addr = {
-   en_hi = 0x02108DE0,       -- BT highbyte (USA/EUR)
-   en_lo = 0x02108DDC,       -- BT lowbyte (USA/EUR)
-   jp_hi = 0x02108D24,       -- BT highbyte (JPN)
-   jp_lo = 0x02108D20        -- BT lowbyte (JP)
+   en_hi = 0x02108DE0, -- BT highbyte (USA/EUR)
+   en_lo = 0x02108DDC, -- BT lowbyte (USA/EUR)
+   jp_hi = 0x02108D24, -- BT highbyte (JPN)
+   jp_lo = 0x02108D20  -- BT lowbyte (JP)
 }
 
 -- Colours based on yab's hoimi table (in dark mode)
@@ -112,8 +112,6 @@ function bt_rand()
    return highbyte
 end
 
--- getResult: calculate the percentage/healing value from the output
--- rand = BT output
 function getResult(rand, ratio)
    local result = rand / (uint32_max / ratio)
 
@@ -125,7 +123,6 @@ function getResult(rand, ratio)
    return result
 end
 
--- getColour: set text and fill colours for each square on the table
 function getColour(percentage, attribute)
    local colour
 
@@ -187,14 +184,14 @@ function main()
       -- position = BT position 0-99
       local ones, tens, position = -1, -10, 0
 
-      -- Create squares/labels for the top row
+      -- Top row
       for x = 15, 231, 24 do
          ones = ones + 1
          box(x, -142, x + 24, -131, colours.indigoFill, colours.greyStroke)
          text(x + 9, -140, ones, colours.white, colours.clear)
       end
 
-      -- Create squares/labels for the leftmost column
+      -- Leftmost column
       for y = -131, -14, 13 do
          tens = tens + 10
          if tens == 0 then tens = " " .. tens end
@@ -202,8 +199,7 @@ function main()
          text(2, y + 3, tens, colours.white, colours.clear)
       end
 
-      -- Create square for the top left corner
-      box(0, -142, 15, -131, colours.indigoFill, colours.greyStroke)
+      box(0, -142, 15, -131, colours.indigoFill, colours.greyStroke) -- Top left corner
 
       highbyte = memory.readdword(addr.en_hi)
       lowbyte = memory.readdword(addr.en_lo)
@@ -238,17 +234,17 @@ function main()
             end
 
             text(dx + 3, y + 3, int, textColour, colours.clear)
-            pixel(dx + 15, y + 9, textColour, colours.clear) -- the decimal point lol
+            pixel(dx + 15, y + 9, textColour, colours.clear) -- decimal point
             text(dx + 16, y + 3, string.sub(dec, -2, -2), textColour, colours.clear)
 
          end
       end
 
-      box(16, -130, 38, -119, colours.clear, colours.whiteStroke) -- position 0 outline
-      box(40, -130, 62, -119, colours.clear, colours.redStroke)   -- position 1 outline
-      box(64, -130, 86, -119, colours.clear, colours.blueStroke)  -- position 2 outline
-      box(112, -130, 134, -119, colours.clear, colours.redStroke)   -- position 4 outline
-      box(136, -130, 158, -119, colours.clear, colours.blueStroke)  -- position 5 outline
+      box(16, -130, 38, -119, colours.clear, colours.whiteStroke)  -- position 0 outline
+      box(40, -130, 62, -119, colours.clear, colours.redStroke)    -- position 1 outline
+      box(64, -130, 86, -119, colours.clear, colours.blueStroke)   -- position 2 outline
+      box(112, -130, 134, -119, colours.clear, colours.redStroke)  -- position 4 outline
+      box(136, -130, 158, -119, colours.clear, colours.blueStroke) -- position 5 outline
 
    end
 

@@ -1,18 +1,17 @@
 ## DQ9_ATI
-An interactive HUD for the A-Table (USA/EUR).
+Displays A-Table info (USA/EUR).
 ### How to Use
-Hit L + R to toggle visibility<br>
-Hit Start to restart tracking the position<br>
+Hit L + R to toggle visibility on/off<br>
+Hit Start to restart tracking<br>
 ## DQ9_ChestTimer
-An interactive HUD for the chest timer (USA). If the timer isn't running properly, please restart the script.
+Displays chest timer info (USA). If the timer isn't running properly, please restart the script.
 ### How to Use
 Hit L + R to toggle visibility<br>
 Hit Start to start/reset the stopwatch
 ## DQ9_BTI
-An interactive HUD for the B-Table/Hoimi Table (USA/EUR).
+Displays B-Table/Hoimi Table info (USA/EUR).
 ### How to Use
-Hit Start to toggle visibility<br>
-The table will update automatically
+Hit Start to toggle visibility on/off<br>
 ## DQ9_ScrapeMapData
 Prints map data from your inventory to the lua console in CSV formatting (USA).
 ### How to Use

@@ -2,6 +2,7 @@
 - Displays fountain group in the top left corner
 - Displays respawn timers and capacity indicators for all 89 sparkly spot nodes in the game
 ### How to Use
+- Place the sprites folder in the same directory as the lua script
 - Press Start to toggle visibility on/off
 - Timers in cyan are influenced by fountain group
 - Capacity indicators change from grey (0) to white (partially filled) to green (full)

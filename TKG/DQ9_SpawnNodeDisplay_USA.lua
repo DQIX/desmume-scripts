@@ -26,6 +26,8 @@ local zoomCustom  = 0x00030000
 local coolupCustom = 0x0000FFFF
 
 local prevStart = false
+local showGrid = false
+local prevAB = false
 
 -- Read camera matrix (3x4)
 local function readCameraMatrix()
@@ -207,6 +209,12 @@ local function main()
 
     local input = joypad.get(1)
 
+    local AB = input.A and input.B
+    if AB and not prevAB then
+        showGrid = not showGrid
+    end
+    prevAB = AB
+
     if input.start and not prevStart then
         memory.writedword(addr.tilt, tiltCustom)
         memory.writedword(addr.zoom, zoomCustom)
@@ -222,7 +230,9 @@ local function main()
 
     local inBattle = memory.readbyte(addr.battleFlag)
     if inBattle == 0 then
-        drawGrid(px, py, pz, camMatrix, projMatrix)
+        if showGrid then
+            drawGrid(px, py, pz, camMatrix, projMatrix)
+        end
         drawNodes(camMatrix, projMatrix, px, py, pz)
     end
 end

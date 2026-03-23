@@ -1,9 +1,9 @@
-## DQ9_ATI
+## A-Table Interface (DQ9_ATI)
 Displays A-Table info (USA/EUR).
 ### How to Use
 - Hit L + R to toggle visibility on/off<br>
 - Hit Start to restart tracking<br>
-## DQ9_BTI
+## B-Table Interface (DQ9_BTI)
 Displays B-Table/Hoimi Table info (USA/EUR).
 ### How to Use
 - Hit Start to toggle visibility on/off<br>

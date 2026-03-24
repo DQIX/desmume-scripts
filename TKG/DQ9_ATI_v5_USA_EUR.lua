@@ -11,7 +11,7 @@
 -- Coolup counter (0-1000)
 
 local addrAT = 0x020EEF30 -- USA/EUR
-local addrCoolup = 0x020FDD4C -- USA
+local addrCoolup = 0x020FDD4C -- USA/EUR
 
 local mult = 1103515245
 local inc = 12345
@@ -31,11 +31,9 @@ local grey2 = "#d6d6d6"
 local grey3 = "#848484"
 local grey4 = "#424242"
 
--- Base position (move entire GUI here)
 local baseX = 0
 local baseY = 0
 
--- Background draw data (relative coordinates)
 local bgElements = {
    {"box", 9,-186,246,-176,"#000000c0","#000000c0"},
 
@@ -99,7 +97,6 @@ local bgElements = {
    {"line", 9,-173,246,-173,grey4},
 }
 
--- Utility functions
 local function toUint32(x)
    return bit.band(x, 0xFFFFFFFF)
 end
@@ -139,7 +136,6 @@ local function getATOutput(currentSeed)
    return bit.band(bit.rshift(currentSeed, 16), 32767)
 end
 
--- Draw background from table
 local function drawBackground(baseX, baseY)
    for _, e in ipairs(bgElements) do
       local t = e[1]
@@ -164,7 +160,6 @@ local function drawBackground(baseX, baseY)
    end
 end
 
--- L+R toggle handler
 local function handletoggleLR(inputs)
    local pressed = inputs.L and inputs.R
    if pressed and not prevLR then
@@ -173,7 +168,6 @@ local function handletoggleLR(inputs)
    prevLR = pressed
 end
 
--- Text helpers
 local function rightAlignText(xRight, y, text, color, bg)
    local str = tostring(text)
    local charWidth = 6
@@ -181,7 +175,6 @@ local function rightAlignText(xRight, y, text, color, bg)
    gui.text(xRight - width, y, str, color, bg)
 end
 
--- GUI renderer
 local function renderGUI(seed_hex, output, position, mapmethod)
    local baseX = baseX
    local baseY = baseY
@@ -204,12 +197,11 @@ local function renderGUI(seed_hex, output, position, mapmethod)
    end
 end
 
--- Main loop
 local function main()
---memory.writedword(0x020EEF30, 0xf76549a9) -- AT
---memory.writedword(0x020FDD4C, 0x0000FFFF) -- coolup
---memory.writedword(0x027E38B0, 0x000216CF) -- field camera tilt
---memory.writedword(0x027E38B4, 0x00031192) -- field camera zoom
+--memory.writedword(addrAT, 0xDEADBEEF) -- AT
+--memory.writedword(addrCoolup, 0x0000FFFF) -- coolup
+--memory.writedword(0x027E38B0, 0x00020000) -- field camera tilt
+--memory.writedword(0x027E38B4, 0x00030000) -- field camera zoom
 
    local seed = toUint32(memory.readdword(addrAT))
    local seed_hex = getHex(seed, 8)

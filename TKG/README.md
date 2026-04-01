@@ -1,10 +1,10 @@
 ## A-Table Interface (v6)
-Displays A-Table info.
+Displays A-Table info: current 32bit seed and 15bit output, position, map method offset, and spawn cooldown count up accumulator (AKA "coolup")
 ### How to Use
 - Hit L + R + A to toggle visibility on/off<br>
 - Hit Start + A to restart tracking<br>
 ## B-Table Interface (v3)
-Displays B-Table/Hoimi Table info.
+Displays B-Table/Hoimi Table info: current 32bit highbyte/lowbyte, position, hoimi table percentages
 ### How to Use
 - Hit L + R + B to toggle visibility on/off<br>
 - Hit Start + B to restart tracking<br>

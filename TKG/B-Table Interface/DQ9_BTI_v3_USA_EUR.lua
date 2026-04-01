@@ -11,16 +11,16 @@ local addr = {
 -- https://www.yabd.org/apps/dq9/hoimi.php
 local colours = {
    clear       = "clear",
-   black       = "#000000D0",
+   black       = "#000000",
    white       = "white",
    whiteStroke = "#CCCCCC",
    greyStroke  = "#444444",
-   indigoFill  = "#000044D0",
+   indigoFill  = "#000044",
    redStroke   = "#DD66CC",
-   redFill     = "#880000D0",
+   redFill     = "#880000",
    redText     = "#FFBBDD",
    blueStroke  = "#0088FF",
-   blueFill    = "#000088D0",
+   blueFill    = "#000088",
    blueText    = "#88CCFF"
 }
 

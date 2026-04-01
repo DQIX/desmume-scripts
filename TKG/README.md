@@ -31,4 +31,4 @@ Displays monster spawn nodes on the field (USA).
 - Hit L + R or hold B (party tricks) to reset the camera
 - Hit A + B to toggle visibility of grid
 ## Special Thanks
-- shimokia (control schemes, BT position tracker)
+- shimokia (control schemes, BT position tracker, BT monster compositions)

@@ -6,7 +6,7 @@ local instrThreshold = 0x02073C64 -- USA (EUR: 0x02073C74)
 
 local mult = 1103515245
 local inc = 12345
-local maxAdvances = 999
+local maxAdvances = 1999
 local mapMethodOffset = 33
 
 -- coolup

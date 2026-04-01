@@ -216,7 +216,7 @@ function main()
    end
 
    local curKey = makeKey(highbyte, lowbyte)
-   local position = BLookup[curKey] or "-"
+   local position = BLookup[curKey] or "--------"
 
    if toggleVis then
 

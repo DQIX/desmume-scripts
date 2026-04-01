@@ -21,7 +21,13 @@ local colours = {
    redText     = "#FFBBDD",
    blueStroke  = "#0088FF",
    blueFill    = "#000088",
-   blueText    = "#88CCFF"
+   blueText    = "#88CCFF",
+   green       = "green"
+}
+
+local gradient = {
+   low  = {r = 255, g = 255, b = 255},
+   high = {r = 0,   g = 136,   b = 0}
 }
 
 local BTable = {}
@@ -44,6 +50,8 @@ local uint32_max = 2^32
 
 local highbyte
 local lowbyte
+local initial_hi = nil
+local initial_lo = nil
 
 local A_hi = 0x5D588B65
 local A_lo = 0x6C078965
@@ -56,6 +64,14 @@ local maxAdvances = 10000
 
 local function getHex(decimal, digits)
    return string.format("%0"..digits.."X", decimal)
+end
+
+local function lerp(a, b, t)
+   return a + (b - a) * t
+end
+
+local function rgbToHex(r, g, b)
+   return string.format("#%02X%02X%02X", r, g, b)
 end
 
 local function mul_split(x, a)
@@ -126,21 +142,26 @@ function getResult(rand, ratio)
 end
 
 function getColour(percentage, attribute)
-   local colour
+   local t = percentage / 100 -- normalize to 0-1
+
+   -- interpolate each channel
+   local r = math.floor(lerp(gradient.low.r, gradient.high.r, t))
+   local g = math.floor(lerp(gradient.low.g, gradient.high.g, t))
+   local b = math.floor(lerp(gradient.low.b, gradient.high.b, t))
+
+   local fill = rgbToHex(r, g, b)
 
    if attribute == "fill" then
-      if percentage < redPercent then colour = colours.redFill
-      elseif percentage < bluePercent then colour = colours.blueFill
-      else colour = colours.black
-      end
+      return fill
    elseif attribute == "text" then
-      if percentage < redPercent then colour = colours.redText
-      elseif percentage < bluePercent then colour = colours.blueText
-      else colour = colours.white
+      local brightness = (r * 0.299 + g * 0.587 + b * 0.114)
+
+      if brightness < 128 then
+         return colours.white
+      else
+         return colours.black
       end
    end
-
-   return colour
 end
 
 local function handleToggleVis(inputs)
@@ -196,6 +217,8 @@ function main()
 
       local orig_hi = highbyte
       local orig_lo = lowbyte
+      initial_hi = orig_hi
+      initial_lo = orig_lo
 
       local key = makeKey(orig_hi, orig_lo)
       BTableFull[0] = {orig_hi, orig_lo}
@@ -216,7 +239,7 @@ function main()
    end
 
    local curKey = makeKey(highbyte, lowbyte)
-   local position = BLookup[curKey] or "--------"
+   local position = BLookup[curKey] or "-"
 
    if toggleVis then
 
@@ -225,11 +248,19 @@ function main()
       text(3, -164, "HI: 0x" .. getHex(highbyte, 8), colours.white, colours.clear)
       text(3, -152, "L0: 0x" .. getHex(lowbyte, 8), colours.white, colours.clear)
 
-      text(104, -164, "P0SITI0N", colours.white, colours.clear)
-      rightAlignText(152, -152, position, colours.white, colours.clear)
+      text(98, -164, "P0S:", colours.white, colours.clear)
+      rightAlignText(158, -164, position, colours.white, colours.clear)
+      
+      text(98, -152, "MAX:", colours.white, colours.clear)
+      rightAlignText(158, -152, maxAdvances)
 
-      rightAlignText(250, -164, " RED: " .. string.format("%4.1f", redPercent) .. "%", colours.redText, colours.clear)
-      rightAlignText(250, -152, "BLUE: " .. string.format("%4.1f", bluePercent) .. "%", colours.blueText, colours.clear)
+      if initial_hi and initial_lo then
+         text(168, -164, "HI: 0x" .. getHex(initial_hi, 8), colours.green, colours.clear)
+         text(168, -152, "L0: 0x" .. getHex(initial_lo, 8), colours.green, colours.clear)
+      end
+
+      --rightAlignText(250, -164, " RED: " .. string.format("%4.1f", redPercent) .. "%", colours.redText, colours.clear)
+      --rightAlignText(250, -152, "BLUE: " .. string.format("%4.1f", bluePercent) .. "%", colours.blueText, colours.clear)
 
       box(0, -142, 15, -131, colours.indigoFill, colours.greyStroke) -- Top left corner
       
@@ -284,10 +315,10 @@ function main()
       end
 
       box(16, -130, 38, -119, colours.clear, colours.whiteStroke)  -- position 0 outline
-      box(40, -130, 62, -119, colours.clear, colours.redStroke)    -- position 1 outline
-      box(64, -130, 86, -119, colours.clear, colours.blueStroke)   -- position 2 outline
-      box(112, -130, 134, -119, colours.clear, colours.redStroke)  -- position 4 outline
-      box(136, -130, 158, -119, colours.clear, colours.blueStroke) -- position 5 outline
+      --box(40, -130, 62, -119, colours.clear, colours.redStroke)    -- position 1 outline
+      --box(64, -130, 86, -119, colours.clear, colours.blueStroke)   -- position 2 outline
+      --box(112, -130, 134, -119, colours.clear, colours.redStroke)  -- position 4 outline
+      --box(136, -130, 158, -119, colours.clear, colours.blueStroke) -- position 5 outline
 
    end
 

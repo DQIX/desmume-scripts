@@ -1,5 +1,6 @@
 ## A-Table Interface (v6)
-Displays A-Table info: current 32bit seed and 15bit output, position, map method offset, and spawn cooldown count up accumulator (AKA "coolup")
+Displays A-Table info: current 32bit seed and 15bit output, position, map method offset, and spawn cooldown count up accumulator (AKA "coolup")<br>
+Control scheme 
 ### How to Use
 - Hit L + R + A to toggle visibility on/off<br>
 - Hit Start + A to restart tracking<br>
@@ -30,3 +31,5 @@ Displays monster spawn nodes on the field (USA).
 - Hit Start for a one-time write to zoom camera out
 - Hit L + R or hold B (party tricks) to reset the camera
 - Hit A + B to toggle visibility of grid
+## Special Thanks
+- shimokia (control schemes, BT position tracker)

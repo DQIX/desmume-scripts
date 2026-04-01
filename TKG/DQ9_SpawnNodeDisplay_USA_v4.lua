@@ -191,8 +191,6 @@ local function drawWorldTextRaw(wx, wy, wz, text, camMatrix, projMatrix, colour)
     local sx, sy = project4x4(rx, ry, rz, projMatrix)
 
     if not sx or not sy then return end
-
-    -- match behavior of circles/crosses
     if not isOnBottomScreen(sx, sy) then return end
 
     gui.text(sx - 12, sy, text, colour)
@@ -204,12 +202,11 @@ local function drawWorldTextClamped(wx, wy, wz, text, camMatrix, projMatrix, col
 
     if not sx or not sy then return end
 
-    -- text box size (approx)
     local paddingX = 12
     local paddingY = 0
 
     local minX = 2
-    local maxX = screenW - 40   -- prevent overflow (adjust if needed)
+    local maxX = screenW - 40
     local minY = 2
     local maxY = screenH - 10
 
@@ -524,12 +521,12 @@ local function main()
                         --drawWorldTextClamped(vx, vy, vz, distStr .. "m", camMatrix, projMatrix, colour)
                     end
                     drawWorldCross(px, py, pz, 0.25, camMatrix, projMatrix, colour)
-                    gui.text(5, -75 + i * 11, "P"..i..": "..dStr.."m", colour)
+                    --gui.text(5, -75 + i * 11, "P"..i..": "..dStr.."m", colour)
                     
                 end
             end
         end
-        gui.text(5, -75, "R0: "..distStr .. "m")
+        --gui.text(5, -75, "R0: "..distStr .. "m")
 
     end
 end
@@ -583,7 +580,5 @@ memory.registerexec(0x020c3050, function()
         lastCall = false
     end
 end)
-
-
 
 gui.register(main)

@@ -1,4 +1,4 @@
-## Monster Spawn Node Display
+## [DQ9] Monster Spawn Node Display (USA)
 Displays monster spawn nodes on the field (USA).
 ### How to Use
 - Hit Start for a one-time write to zoom camera out

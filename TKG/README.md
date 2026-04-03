@@ -26,3 +26,4 @@ To select all and copy, hit ctrl+home -> ctrl+shift+end -> ctrl+C.<br>
 "Deftness (36th)", "Deftness (37th)", and "Map Method Metal Slimes (35th)" are used for creating map methods of metal slime variants in grottoes.
 ## Special Thanks
 - shimokia (control schemes, BT position tracker, BT monster compositions)
+- The Quester's Rest Discord server: https://discord.com/invite/B3rjhdfG5m

@@ -1,4 +1,4 @@
-## What is lua scripting?
+## What is Lua Scripting?
 https://tasvideos.org/LuaScripting
 ## jpn
 Lua scripts by DaisukeDaisuke. Mainly for the JPN version of the game.<br>

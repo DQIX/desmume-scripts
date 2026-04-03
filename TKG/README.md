@@ -31,4 +31,5 @@ To select all and copy, hit ctrl+home -> ctrl+shift+end -> ctrl+C.<br>
 - hurblub
 - DaisukeDaisuke
 - sÿlwer
+- mkdasher
 - And many more from the Quester's Rest Discord server: https://discord.com/invite/B3rjhdfG5m

@@ -234,7 +234,7 @@ local function main()
     if inBattle == 0 then
         local px, py, pz = readVec3(addr.mc)
         local pr = readRadius(addr.mc)
-        drawWorldCross(px, py, pz, 0.25, cam, proj, "green")
+        drawWorldCross(px, py, pz, 0.25, cam, proj, "cyan")
 
         for i, base in ipairs(monSlots) do
             local x, y, z = readVec3(base)

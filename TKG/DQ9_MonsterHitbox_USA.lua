@@ -22,6 +22,10 @@ local monSlots = {
 
 local monDist = {}
 
+local DAT_overlay_d_17__02196bf8 = 0x460CBE66
+local FULL_CIRCLE = 0x6488
+local addrAreaID = 0x020FB3F8
+local prevAreaID = nil
 local scale = 4096
 local screenW, screenH = 256, 192
 
@@ -143,10 +147,6 @@ local function readVec3(base)
     return x, y, z
 end
 
-local function readRadius(base)
-    return fx32(memory.readdword(base + 0x64)) / 2
-end
-
 local function drawWorldCircle(cx, cy, cz, r, cam, proj, color)
     local segments = 16
     local step = (math.pi * 2) / segments
@@ -211,6 +211,85 @@ local function drawWorldCross(wx, wy, wz, size, camMatrix, projMatrix, colour)
     end
 end
 
+local function u32ToFloat(u)
+    local sign = bit.rshift(u, 31) == 1 and -1 or 1
+    local exp  = bit.band(bit.rshift(u, 23), 0xFF)
+    local frac = bit.band(u, 0x7FFFFF)
+
+    if exp == 0 then
+        return sign * (frac / 0x800000) * 2^-126
+    elseif exp == 0xFF then
+        return 0
+    end
+
+    return sign * (1 + frac / 0x800000) * 2^(exp - 127)
+end
+
+local angleFloat = u32ToFloat(DAT_overlay_d_17__02196bf8)
+
+local function angleDiff(a, b)
+    local d = (b - a) % FULL_CIRCLE
+    if d > FULL_CIRCLE / 2 then
+        d = d - FULL_CIRCLE
+    end
+    return d
+end
+
+local function drawWorldWedge(cx, cy, cz, r, aMin, aMax, cam, proj, color)
+    local segments = 24
+
+    local delta = angleDiff(aMin, aMax)
+    local step = delta / segments
+
+    local prevX, prevY, prevZ
+    local firstX, firstY, firstZ
+
+    for i = 0, segments do
+        local a = (aMin + step * i) % FULL_CIRCLE
+        local rad = ((a - FULL_CIRCLE / 4) / FULL_CIRCLE) * (2 * math.pi)
+
+        local x = cx + math.cos(rad) * r
+        local z = cz - math.sin(rad) * r
+        local y = cy
+
+        if i == 0 then
+            firstX, firstY, firstZ = x, y, z
+        end
+
+        if prevX then
+            drawWorldLine(prevX, prevY, prevZ, x, y, z, cam, proj, color)
+        end
+
+        prevX, prevY, prevZ = x, y, z
+    end
+
+    drawWorldLine(cx, cy, cz, firstX, firstY, firstZ, cam, proj, color)
+    drawWorldLine(cx, cy, cz, prevX, prevY, prevZ, cam, proj, color)
+end
+
+local function drawWorldCircleCut(cx, cy, cz, r, aMin, aMax, cam, proj, color)
+    local segments = 24
+
+    local delta = (aMin - aMax) % FULL_CIRCLE
+    local step = delta / segments
+
+    local prevX, prevY, prevZ
+
+    for i = 0, segments do
+        local a = (aMax + step * i) % FULL_CIRCLE
+        local rad = ((a - FULL_CIRCLE / 4) / FULL_CIRCLE) * (2 * math.pi)
+
+        local x = cx + math.cos(rad) * r
+        local z = cz - math.sin(rad) * r
+        local y = cy
+
+        if prevX then
+            drawWorldLine(prevX, prevY, prevZ, x, y, z, cam, proj, color)
+        end
+
+        prevX, prevY, prevZ = x, y, z
+    end
+end
 
 memory.registerexec(0x02197044, function()
     local r7 = memory.getregister("r7")
@@ -227,22 +306,40 @@ memory.registerexec(0x02197044, function()
 end)
 
 local function main()
+    --memory.writeword(0x020FDD4C, 0xffff) -- coolup
+
+    local id = memory.readword(addrAreaID)
+
+    if prevAreaID ~= id then
+        prevAreaID = id
+        monDist = {}
+        shouldRender = true
+    end
+
+    if not shouldRender then
+        return
+    end
+
     local cam = readCameraMatrix()
     local proj = readProjMatrix()
 
     local inBattle = memory.readbyte(addr.battleFlag)
     if inBattle == 0 then
         local px, py, pz = readVec3(addr.mc)
-        local pr = readRadius(addr.mc)
         drawWorldCross(px, py, pz, 0.25, cam, proj, "cyan")
 
         for i, base in ipairs(monSlots) do
-            local x, y, z = readVec3(base)
             local r = monDist[i]
-            local r2 = readRadius(base)
 
             if r then
-                drawWorldCircle(x, y, z, r, cam, proj, "red")
+                local x, y, z = readVec3(base)
+                local facing = memory.readword(base + 0x54)
+                local center = (facing + FULL_CIRCLE / 2) % FULL_CIRCLE
+                local aMin = center - angleFloat / 2
+                local aMax = center + angleFloat / 2
+                drawWorldCircleCut(x, y, z, r, aMin, aMax, cam, proj, "red")
+                drawWorldWedge(x, y, z, r, aMin, aMax, cam, proj, "yellow")
+                --gui.text(5, -180 + i * 10, getHex(base, 8) .. " = " .. r)
             end
         end
     end

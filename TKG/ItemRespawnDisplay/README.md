@@ -55,11 +55,15 @@ A save file's fountain group is determined after the MC is created, shortly afte
 ```
 The function responsible is `FUN_0208EA10` (USA).
 ### About Church Saves VS Quicksaves
-`FUN_overlay_d_17__0218b688` (USA) seems to check an 8bit flag at `0x020F33DC` (USA):
+`FUN_overlay_d_17__0218b688` (USA) seems to check an 8bit flag at `0x020F33D8 + 0x4` (USA):
 - 0 = load a church save
+- 1 = chara viewer
 - 2 = create a new save
+- 3 = movie
+- 4 = debug (load default male hero (Nine) in a void)
 - 5 = load a quicksave
 - 6 = title screen
+- 0x64? = delete save
 
 If the flag is 0 or 2 (church save or new save), the function calls `FUN_0208ea10` (USA), which determines the fountain group for new saves or otherwise loads a church save's existing fountain group, then initializes the current capacity for all sparkly spots for both church saves and new saves. It explicitly masks (bitwise "and") each 32bit sparkly spot bitfield with `0xFE01FFFF`.
 

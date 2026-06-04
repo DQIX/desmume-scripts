@@ -7,7 +7,7 @@ https://www.youtube.com/watch?v=XsDvc71ekfY
 - Download dq9maploader.lua and dq9mapwatcher.py
 - Put them in the same directory
 - Run the lua file
-  - Desmume -> tools -> lua scripting -> new lua script window -> browse
+  - In desmume go to tools -> lua scripting -> new lua script window -> browse
 - Run the python file
   - In the directory, enter "cmd" in the address bar
   - In cmd, enter "python dq9mapwatcher.py"
